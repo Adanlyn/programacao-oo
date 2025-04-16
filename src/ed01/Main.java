@@ -1,4 +1,10 @@
 package ed01;
 
+import java.util.Scanner;
+
 public class Main {
-    testes3
+    public static void main(String[] args) {
+       ControleAgenda controle = new ControleAgenda();
+       controle.executar();
+    }
+}
