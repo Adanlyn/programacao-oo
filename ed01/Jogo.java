@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Jogo {
-    private Jogador jogador;
-    private int numeroSecreto;
+    private  Jogador jogador;
+    private  int numeroSecreto;
 
     public Jogo(Jogador jogador) {
         this.jogador = jogador;
