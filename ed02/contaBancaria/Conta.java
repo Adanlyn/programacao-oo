@@ -1,3 +1,4 @@
+package contaBancaria;
 /**
  * Classe abstrata que representa uma conta bancária genérica.
  * Contém métodos para depositar, sacar, transferir e aplicar juros.

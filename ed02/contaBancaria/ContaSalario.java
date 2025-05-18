@@ -1,3 +1,4 @@
+package contaBancaria;
 
 /**
  * Classe que representa uma Conta Salário bancária.
