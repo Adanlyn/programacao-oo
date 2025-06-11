@@ -15,9 +15,9 @@ public abstract class ContatoBase implements Contato {
      * @param email o e-mail do contato.
      */
     public ContatoBase(String nome, String telefone, String email) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+        setNome(nome);
+        setTelefone(telefone);
+        setEmail(email);
     }
 
     /**

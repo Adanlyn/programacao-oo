@@ -31,8 +31,8 @@ public class ContatoView {
             System.out.println("1. Adicionar Contato");
             System.out.println("2. Listar Contatos");
             System.out.println("3. Remover Contato");
-            System.out.println("4. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("4. Sair\n");
+            System.out.printf("Escolha uma opção: ");
 
             int opcao = scanner.nextInt();
             scanner.nextLine(); 
@@ -50,7 +50,7 @@ public class ContatoView {
                 case 4:
                     return;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("\nOpção inválida!");
             }
         }
     }
@@ -61,16 +61,31 @@ public class ContatoView {
     private void adicionarContato() {
         System.out.println("\nTipo de Contato:");
         System.out.println("1. Pessoa Física");
-        System.out.println("2. Pessoa Jurídica");
+        System.out.println("2. Pessoa Jurídica\n");
         System.out.print("Escolha: ");
         int tipo = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
+    String nome = null;
+    boolean nomeValido = false;
+    while (!nomeValido) {
+        System.out.print("\nNome: ");
+        nome = scanner.nextLine();
+        try {
+            // Validação antecipada do nome com instância temporária
+            if (tipo == 1) {
+                new PessoaFisica(nome, "000", "teste@email.com", "00000000000");
+            } else if (tipo == 2) {
+                new PessoaJuridica(nome, "000", "teste@email.com", "00000000000000");
+            }
+            nomeValido = true; // Nome válido, sai do laço
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
 
-        System.out.print("Telefone: ");
-        String telefone = scanner.nextLine();
+    System.out.print("Telefone: ");
+    String telefone = scanner.nextLine();
 
         System.out.print("Email: ");
         String email = scanner.nextLine();
@@ -85,9 +100,9 @@ public class ContatoView {
                 String cnpj = scanner.nextLine();
                 controller.adicionar(new PessoaJuridica(nome, telefone, email, cnpj));
             }
-            System.out.println("Contato adicionado com sucesso!");
+            System.out.println("\nContato adicionado com sucesso!");
         } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         }
     }
 
@@ -96,10 +111,10 @@ public class ContatoView {
      * Solicita o CPF ou CNPJ do contato a ser removido e o remove.
      */
     private void removerContato() {
-        System.out.print("Digite o CPF ou CNPJ do contato a ser removido: ");
+        System.out.print("\nDigite o CPF ou CNPJ do contato a ser removido: ");
         String identificador = scanner.nextLine();
         controller.remover(identificador);
-        System.out.println("Contato removido com sucesso!");
+        System.out.println("\nContato removido com sucesso!");
     }
 
     /**
@@ -115,7 +130,7 @@ public class ContatoView {
         System.out.println("\nLista de Contatos:");
         System.out.printf("%-20s %-15s %-30s %-15s %-15s%n", 
                          "Nome", "Telefone", "Email", "CPF/CNPJ", "Tipo");
-        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------");
 
         for (Contato contato : contatos) {
             String tipo = contato instanceof PessoaFisica ? "PF" : "PJ";
